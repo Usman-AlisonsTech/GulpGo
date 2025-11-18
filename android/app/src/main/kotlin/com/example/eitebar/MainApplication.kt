@@ -1,4 +1,4 @@
-package com.alisons.aquaflow
+package com.aquaflow.alisons
 
 import io.flutter.app.FlutterApplication
 

@@ -24,7 +24,7 @@ class DashboardView extends StatelessWidget {
                     gradient: LinearGradient(
                       colors: [
                         ColorConstants.themeColor,
-                        Color(0xff4BBFF8),
+                        ColorConstants.lightBlue
                       ],
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
@@ -50,7 +50,7 @@ class DashboardView extends StatelessWidget {
                                 height: 40,
                                 decoration: BoxDecoration(
                                     shape: BoxShape.circle,
-                                    color: Color(0xff6CC9F9)),
+                                    color: ColorConstants.lightBlue),
                                 child: Center(
                                   child: CustomText(
                                     text: '👋',
@@ -70,8 +70,8 @@ class DashboardView extends StatelessWidget {
                          Container(
   padding: const EdgeInsets.symmetric(horizontal:  20, vertical: 15),
   decoration: BoxDecoration(
-    gradient: const LinearGradient(
-      colors: [Color(0xFF40C4FF), Color(0xFF0099CC)],
+    gradient: LinearGradient(
+      colors: [ColorConstants.gradientColor1,ColorConstants.gradientColor2],
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
     ),
@@ -220,7 +220,7 @@ class DashboardView extends StatelessWidget {
                         ],
                       ),
                       CustomText(
-                        text: '\$24.00',
+                        text: 'Pkr 24.00',
                         fontSize: 16,
                         weight: FontWeight.w500,
                       ),
@@ -291,7 +291,7 @@ class DashboardView extends StatelessWidget {
                             ),
                             SizedBox(height: 4),
                              CustomText(
-                                 text: "\$48.50",
+                                 text: "Pkr 48.50",
                                     fontSize: 25,
                                     weight: FontWeight.w500,
                                   ),
@@ -319,7 +319,7 @@ class DashboardView extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   CustomText(
-                    text: "\$36.00",
+                    text: "Pkr 36.00",
                     fontSize: 16,
                     weight: FontWeight.w500,
                   ),

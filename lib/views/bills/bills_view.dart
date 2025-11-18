@@ -54,7 +54,7 @@ class _BillsViewState extends State<BillsView> {
                   Expanded(
                     child: _buildStatCard(
                       "Total Paid",
-                      "\$132.00",
+                      "Pkr 132.00",
                       "Last 3 months",
                       Icons.trending_up,
                       Colors.green,
@@ -83,7 +83,7 @@ class _BillsViewState extends State<BillsView> {
                   invoice: "INV-1234",
                   date: "Nov 1, 2025",
                   due: "Due: Nov 15, 2025",
-                  amount: "\$48.50",
+                  amount: "Pkr 48.50",
                   status: "Pending",
                   statusColor: Color(0xffA65F00),
                   showPayNow: true,
@@ -93,7 +93,7 @@ class _BillsViewState extends State<BillsView> {
                   invoice: "INV-1233",
                   date: "Oct 1, 2025",
                   paidOn: "Paid on: Oct 28, 2025",
-                  amount: "\$36.00",
+                  amount: "Pkr 36.00",
                   status: "Paid",
                   statusColor: Colors.green,
                   showDownloadReceipt: true,
@@ -185,7 +185,7 @@ class _BillsViewState extends State<BillsView> {
               ),
               const Spacer(),
               const CustomText(
-                text: "\$36.00",
+                text: "Pkr 36.00",
                 fontSize: 18,
                 weight: FontWeight.w500,
                 color: Colors.green,
@@ -256,7 +256,7 @@ class _BillsViewState extends State<BillsView> {
           ),
           const SizedBox(height: 15),
           const CustomText(
-            text: "\$48.50",
+            text: "Pkr 48.50",
             fontSize: 32,
             color: Colors.white,
             weight: FontWeight.w500,

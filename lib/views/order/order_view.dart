@@ -205,7 +205,7 @@ class _FirstStepUiState extends State<FirstStepUi> {
           // 20L Bottle
           _buildBottleRow(
             size: "20L Bottle",
-            price: "\$12.00 each",
+            price: "Pkr 12.00 each",
             quantity: bottle20L,
             onDecrease: () => updateQuantity(-1, bottle20L, (v) => bottle20L = v),
             onIncrease: () => updateQuantity(1, bottle20L, (v) => bottle20L = v),
@@ -215,7 +215,7 @@ class _FirstStepUiState extends State<FirstStepUi> {
           // 10L Bottle
           _buildBottleRow(
             size: "10L Bottle",
-            price: "\$8.00 each",
+            price: "Pkr 8.00 each",
             quantity: bottle10L,
             onDecrease: () => updateQuantity(-1, bottle10L, (v) => bottle10L = v),
             onIncrease: () => updateQuantity(1, bottle10L, (v) => bottle10L = v),
@@ -225,7 +225,7 @@ class _FirstStepUiState extends State<FirstStepUi> {
           // 5L Bottle
           _buildBottleRow(
             size: "5L Bottle",
-            price: "\$5.00 each",
+            price: "Pkr 5.00 each",
             quantity: bottle5L,
             onDecrease: () => updateQuantity(-1, bottle5L, (v) => bottle5L = v),
             onIncrease: () => updateQuantity(1, bottle5L, (v) => bottle5L = v),
@@ -241,12 +241,12 @@ class _FirstStepUiState extends State<FirstStepUi> {
             child: Column(
               children: [
           // Subtotal
-          _buildPriceRow("Subtotal", "\$${subtotal.toStringAsFixed(2)}"),
+          _buildPriceRow("Subtotal", "Pkr ${subtotal.toStringAsFixed(2)}"),
 
           const SizedBox(height: 20),
 
           // Delivery Fee
-          _buildPriceRow("Delivery Fee", "\$3.00"),
+          _buildPriceRow("Delivery Fee", "Pkr 3.00"),
 
           const SizedBox(height: 20),
           const Divider(height: 1, thickness: 1),
@@ -254,7 +254,7 @@ class _FirstStepUiState extends State<FirstStepUi> {
           const SizedBox(height: 20),
 
           // Total
-          _buildPriceRow("Total", "\$${total.toStringAsFixed(2)}", isTotal: true),
+          _buildPriceRow("Total", "Pkr ${total.toStringAsFixed(2)}", isTotal: true),
               ],
             ),
           )
@@ -638,7 +638,7 @@ class _ThirdStepUiState extends State<ThirdStepUi> {
           const SizedBox(height: 20),
 
           // Delivery Fee
-          _buildPriceRow("20x 20L Bottle", "\$3.00", isOrderedList: true),
+          _buildPriceRow("20x 20L Bottle", "Pkr 3.00", isOrderedList: true),
 
           const SizedBox(height: 20),
           const Divider(height: 1, thickness: 1),
@@ -791,7 +791,7 @@ class FourthStepUi extends StatelessWidget {
                 _SummaryRow(label: "Payment", value: "Cash on Delivery"),
                 _SummaryRow(
                   label: "Total Amount",
-                  value: "\$27.00",
+                  value: "Pkr 27.00",
                 ),
               ],
             ),

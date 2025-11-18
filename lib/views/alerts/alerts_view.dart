@@ -70,7 +70,7 @@ class AlertsView extends StatelessWidget {
                   icon: Icons.payment,
                   iconColor: Colors.orange,
                   title: "Payment Reminder",
-                  body: "Your bill of \$48.50 is due on Nov 15, 2025",
+                  body: "Your bill of Pkr 48.50 is due on Nov 15, 2025",
                   timeAgo: "2 hours ago",
                   hasUnreadDot: true,
                 ),

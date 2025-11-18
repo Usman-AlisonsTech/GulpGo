@@ -24,7 +24,7 @@ class _OtpViewState extends State<OtpView> {
         height: size.height,
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFF0D7FE8), Color(0xFF52B6FF)],
+            colors: [ColorConstants.gradientColor1, ColorConstants.gradientColor2,],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
