@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialBinding: InitialBindings(),
       theme: ThemeData(
+        // scaffoldBackgroundColor: Color(0xffF0F1F3),
         scaffoldBackgroundColor: Colors.white,
       ),
       home: LoginView(),

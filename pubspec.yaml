@@ -2,7 +2,7 @@ name: aqua_flow
 description: "Aqua Flow Mobile Application"
 publish_to: "none"
 
-version: 1.0.0+2
+version: 1.0.0+3
 
 environment:
   sdk: ^3.5.3
@@ -31,6 +31,7 @@ flutter:
   assets:
     - assets/fonts/
     - assets/svg/
+    - assets/png/
 
   fonts:
     - family: Poppins
@@ -61,3 +62,10 @@ flutter:
 #     - assets/png/
 #     - assets/svg/
 
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/png/app_icon.png"
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_foreground: "assets/png/app_icon.png"          

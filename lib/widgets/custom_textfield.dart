@@ -1,3 +1,4 @@
+import 'package:aqua_flow/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -88,8 +89,8 @@ class CustomTextField extends StatelessWidget {
         suffixIcon: suffixIcon,
         contentPadding: contentPadding ??
             EdgeInsets.only(
-              top: 10,
-              bottom: 10,
+              top: 8,
+              bottom: 8,
               left: leftPadding ?? 25,
               right: 20,
             ),
@@ -101,7 +102,7 @@ class CustomTextField extends StatelessWidget {
           minWidth: 24,
           minHeight: 24,
         ),
-        hintStyle: hintStyle ?? const TextStyle(color: Color(0xff9DA3AE), fontSize: 15, fontFamily: 'Poppins', fontWeight: FontWeight.w500),
+        hintStyle: hintStyle ?? TextStyle(color: ColorConstants.darkGreyColor, fontSize: 15, fontFamily: 'Poppins', fontWeight: FontWeight.w500),
         enabledBorder: border(),
         focusedBorder: border(),
         errorBorder: errorBorder(),
@@ -112,7 +113,7 @@ class CustomTextField extends StatelessWidget {
 
   OutlineInputBorder border() {
   return OutlineInputBorder(
-    borderRadius: BorderRadius.circular(borderRadius ?? 5),
+    borderRadius: BorderRadius.circular(borderRadius ?? 8),
     borderSide: BorderSide(
       color: borderColor ?? Colors.black,
       width: borderWidth ??1.2 ,
@@ -122,7 +123,7 @@ class CustomTextField extends StatelessWidget {
 
 OutlineInputBorder errorBorder() {
   return OutlineInputBorder(
-    borderRadius: BorderRadius.circular(5),
+    borderRadius: BorderRadius.circular(8),
     borderSide: BorderSide(
       color: Colors.red[900]!,
       width: borderWidth ?? 0,

@@ -34,15 +34,17 @@ class LoginView extends StatelessWidget {
                 children: [
                   /// App Icon
                   Container(
-                    padding: const EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(15),
                     decoration: const BoxDecoration(
                       color: Colors.white,
                       shape: BoxShape.circle,
                     ),
-                    child: Icon(Icons.water_drop, size: 30, color: Colors.blue),
+                    child: Image.asset('assets/png/app_logo.png',width: 30,),
                   ),
+
+                  
           
-                  const SizedBox(height: 15),
+                  const SizedBox(height: 10),
           
                   /// App Title
                   const CustomText(
@@ -61,7 +63,7 @@ class LoginView extends StatelessWidget {
                     color: Colors.white,
                   ),
           
-                  const SizedBox(height: 35),
+                  const SizedBox(height: 25),
           
                   /// White Card Container
                   Container(
@@ -69,32 +71,37 @@ class LoginView extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(25),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const CustomText(
-                          text: "Welcome Back",
-                          fontSize: 22,
-                          weight: FontWeight.w500,
-                          letterSpacing: -1,
-                        ),
+                         Center(
+                           child: CustomText(
+                            text: "Welcome Back",
+                            fontSize: 20,
+                            weight: FontWeight.w500,
+                            letterSpacing: -1,
+                                                   ),
+                         ),
                         const SizedBox(height: 8),
-                        const CustomText(
-                          text: "Enter your phone number to continue",
-                          fontSize: 15,
-                          color: Color(0xff6A7282),
-                          weight: FontWeight.w500,
-                        ),
+                         Center(
+                           child: CustomText(
+                            text: "Enter your phone number to continue",
+                            fontSize: 13,
+                            color: Color(0xff6A7282),
+                            weight: FontWeight.w500,
+                            textAlign: TextAlign.center,
+                                                   ),
+                         ),
                         const SizedBox(height: 20),
           
                         /// Phone TextField
                         CustomTextField(
                           hintText: "+1 (555) 000-0000",
                           prefixIcon: Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: Icon(Icons.phone_outlined, color: ColorConstants.greyColor,),
+                            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                            child: Icon(Icons.phone_outlined, color: ColorConstants.greyColor,size: 20),
                           ),
                         ),
           
@@ -110,11 +117,11 @@ class LoginView extends StatelessWidget {
                         const SizedBox(height: 15),
           
                         /// Info Text
-                        const Center(
+                       Center(
                           child: CustomText(
                             fontSize: 13,
                             text: "We'll send you a one-time password",
-                            color: Color(0xff6A7282),
+                            color: ColorConstants.darkGreyColor,
                           ),
                         ),
                       ],
@@ -126,8 +133,8 @@ class LoginView extends StatelessWidget {
                   /// Terms Text
                   const Center(
                     child: CustomText(
-                      text: "By continuing, you agree to our Terms & Privacy Policy",
-                      fontSize: 14,
+                      text: "By continuing, you agree to our Terms & \nPrivacy Policy",
+                      fontSize: 12,
                       color: Colors.white,
                       textAlign: TextAlign.center,
                       weight: FontWeight.w500,

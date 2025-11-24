@@ -318,13 +318,13 @@ class _FirstStepUiState extends State<FirstStepUi> {
               InkWell(
                 onTap: quantity > 0 ? onDecrease : null,
                 child: CircleAvatar(
-                          radius: 15,
+                          radius: 12,
                           backgroundColor:ColorConstants.lightGrey,
-                          child: Icon(Icons.remove, size: 20,),
+                          child: Icon(Icons.remove, size: 18,),
                         ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: CustomText(
                   text: "$quantity",
                   fontSize: 15,
@@ -334,9 +334,9 @@ class _FirstStepUiState extends State<FirstStepUi> {
               InkWell(
                 onTap: onIncrease,
                 child: CircleAvatar(
-                          radius: 15,
+                          radius: 12,
                           backgroundColor: ColorConstants.themeColor,
-                          child: Icon(Icons.add, color: Colors.white,size: 20,),
+                          child: Icon(Icons.add, color: Colors.white,size: 18,),
                         ),)
              
             ],
@@ -352,11 +352,11 @@ class _FirstStepUiState extends State<FirstStepUi> {
       children: [
         CustomText(
           text: label,
-          fontSize: isTotal ? 15 : 16,
+          fontSize: isTotal ? 15 : 15,
         ),
         CustomText(
           text: amount,
-          fontSize: isTotal ? 20 : 16,
+          fontSize: isTotal ? 18 : 16,
           weight: FontWeight.w500,
         ),
       ],
@@ -645,7 +645,7 @@ class _ThirdStepUiState extends State<ThirdStepUi> {
 
           const SizedBox(height: 20),
           // Total
-          _buildPriceRow("Total Amount", "1212", isTotal: true),
+          _buildPriceRow("Total Amount", "Pkr 1212", isTotal: true),
               ],
             ),
           )
@@ -726,7 +726,7 @@ class _ThirdStepUiState extends State<ThirdStepUi> {
         ),
         CustomText(
           text: amount,
-          fontSize: isTotal ? 20 :isOrderedList? 13: 16,
+          fontSize: isTotal ? 18 :isOrderedList? 13: 15,
           weight: FontWeight.w500,
         ),
       ],

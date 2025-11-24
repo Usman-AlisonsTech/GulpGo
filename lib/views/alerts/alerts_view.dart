@@ -24,7 +24,7 @@ class AlertsView extends StatelessWidget {
                   fontSize: 18,
                   weight: FontWeight.w500,
                 ),
-                const SizedBox(height: 4),
+                // const SizedBox(height: 4),
           
                 // Subtitle + Mark All Read
                 Row(
@@ -139,14 +139,14 @@ class AlertsView extends StatelessWidget {
                 const SizedBox(height: 4),
                 CustomText(
                   text: body,
-                  fontSize: 12,
+                  fontSize: 11,
                   color: ColorConstants.darkGreyColor,
                   weight: FontWeight.w500,
                 ),
                 const SizedBox(height: 6),
                 CustomText(
                   text: timeAgo,
-                  fontSize: 12,
+                  fontSize: 10,
                   color: ColorConstants.greyColor,
                   weight: FontWeight.w500,
                 ),

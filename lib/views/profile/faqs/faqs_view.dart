@@ -44,16 +44,14 @@ class FaqsView extends StatelessWidget {
                     InkWell(
                       onTap: () => Get.back(),
                       borderRadius: BorderRadius.circular(50),
-                      child: Padding(
-                        padding: const EdgeInsets.all(6.0),
-                        child: SvgPicture.asset('assets/svg/back.svg'),
-                      ),
+                      child: SvgPicture.asset('assets/svg/back.svg'),
+                      
                     ),
                     const SizedBox(width: 10),
                     CustomText(
                       text: 'FAQs',
-                      fontSize: 20,
-                      weight: FontWeight.bold,
+                     fontSize: 18,
+                weight: FontWeight.w500,
                     ),
                   ],
                 ),
@@ -118,7 +116,7 @@ class _FaqCardState extends State<_FaqCard> {
                 Expanded(
                   child: CustomText(
                     text: widget.question,
-                    fontSize: 15,
+                    fontSize: 14,
                     weight: FontWeight.w500,
                   ),
                 ),

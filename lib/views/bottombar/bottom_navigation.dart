@@ -167,7 +167,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
                           //   width: screen.width,
                           //   color: Colors.white,
                           // ),
-                          Icon(screen.icon,color: ColorConstants.greyColor, size: screen.width),
+                          Icon(screen.icon,color: controller.currentIndex.value == screen.index? ColorConstants.themeColor : ColorConstants.darkGreyColor, size: screen.width,),
                           const SizedBox(height: 6),
                           controller.currentIndex.value == screen.index
                               ? indicator

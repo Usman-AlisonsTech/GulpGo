@@ -1,6 +1,8 @@
 import 'package:aqua_flow/utils/constants.dart';
 import 'package:aqua_flow/views/authentication/login/login_view.dart';
+import 'package:aqua_flow/views/profile/delivery_address/delivery_address_view.dart';
 import 'package:aqua_flow/views/profile/faqs/faqs_view.dart';
+import 'package:aqua_flow/views/profile/personal_info/personal_information_view.dart';
 import 'package:aqua_flow/widgets/common_button.dart';
 import 'package:aqua_flow/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
@@ -60,12 +62,14 @@ class _ProfileViewState extends State<ProfileView> {
                 iconColor: Colors.blue[300]!,
                 title: "Personal Information",
                 subtitle: "Update your details",
+                onpressed: ()=> Get.to(PersonalInformationView()),
               ),
               _buildMenuItem(
                 icon: Icons.location_on_outlined,
                 iconColor: Colors.green[400]!,
                 title: "Delivery Addresses",
                 subtitle: "Manage saved addresses",
+                onpressed: ()=> Get.to(DeliveryAddressView()),
               ),
 
               const SizedBox(height: 24),
@@ -112,11 +116,19 @@ class _ProfileViewState extends State<ProfileView> {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [ColorConstants.themeColor, const Color(0xff4BBFF8)],
+          colors: [ColorConstants.gradientColor1, ColorConstants.gradientColor2],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.3),
+            offset: const Offset(0, 3),
+            blurRadius: 2,
+            spreadRadius: 0.2,
+          ),
+        ],
       ),
       child: Column(
         children: [
@@ -231,6 +243,14 @@ class _ProfileViewState extends State<ProfileView> {
           color: Colors.white,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(color: ColorConstants.lightGrey),
+          boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.3),
+            offset: const Offset(0, 3),
+            blurRadius: 2,
+            spreadRadius: 0.2,
+          ),
+        ],
         ),
         child: Row(
           children: [
@@ -284,6 +304,14 @@ class _ProfileViewState extends State<ProfileView> {
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: ColorConstants.lightGrey),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.3),
+            offset: const Offset(0, 3),
+            blurRadius: 2,
+            spreadRadius: 0.2,
+          ),
+        ],
       ),
       child: Row(
         children: [

@@ -153,7 +153,7 @@ class _BillsViewState extends State<BillsView> {
                     text: "Payment History",
                     fontSize: 14,
                     weight: FontWeight.w500,
-                    color: _selectedTab == 1 ? Colors.black87 : Colors.grey[600],
+                    color: _selectedTab == 1 ? Colors.black87 : ColorConstants.darkGreyColor,
                   ),
                 ),
               ),
@@ -171,6 +171,14 @@ class _BillsViewState extends State<BillsView> {
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: ColorConstants.lightGrey),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.3),
+            offset: const Offset(0, 3),
+            blurRadius: 2,
+            spreadRadius: 0.2,
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -239,11 +247,19 @@ class _BillsViewState extends State<BillsView> {
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [ColorConstants.themeColor, const Color(0xff4BBFF8)],
+          colors: [ColorConstants.gradientColor1, ColorConstants.gradientColor2],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.3),
+            offset: const Offset(0, 3),
+            blurRadius: 2,
+            spreadRadius: 0.2,
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -328,6 +344,14 @@ class _BillsViewState extends State<BillsView> {
         color: Colors.white,
         border: Border.all(color: ColorConstants.lightGrey),
         borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.3),
+            offset: const Offset(0, 3),
+            blurRadius: 2,
+            spreadRadius: 0.2,
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -339,7 +363,7 @@ class _BillsViewState extends State<BillsView> {
               CustomText(
                 text: title,
                 fontSize: 13,
-                color: Colors.grey[700],
+                color:ColorConstants.darkGreyColor,
                 weight: FontWeight.w500,
               ),
             ],
@@ -354,7 +378,7 @@ class _BillsViewState extends State<BillsView> {
           CustomText(
             text: subtitle,
             fontSize: 12,
-            color: Colors.grey[600],
+            color:ColorConstants.darkGreyColor,
             weight: FontWeight.w500,
           ),
         ],
@@ -379,6 +403,14 @@ class _BillsViewState extends State<BillsView> {
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: ColorConstants.lightGrey),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.3),
+            offset: const Offset(0, 3),
+            blurRadius: 2,
+            spreadRadius: 0.2,
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -415,7 +447,7 @@ class _BillsViewState extends State<BillsView> {
           const SizedBox(height: 4),
           Row(
             children: [
-              const Icon(Icons.calendar_today, size: 14, color: Colors.grey),
+              Icon(Icons.calendar_today, size: 14, color:ColorConstants.darkGreyColor),
               const SizedBox(width: 4),
               CustomText(
                 text: date,

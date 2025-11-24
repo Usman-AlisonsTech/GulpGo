@@ -34,15 +34,15 @@ class UserAddressView extends StatelessWidget {
                 children: [
                   /// App Icon
                   Container(
-                    padding: const EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(15),
                     decoration: const BoxDecoration(
                       color: Colors.white,
                       shape: BoxShape.circle,
                     ),
-                    child: Icon(Icons.water_drop, size: 30, color: Colors.blue),
+                    child: Image.asset('assets/png/app_logo.png',width: 30,),
                   ),
 
-                  const SizedBox(height: 15),
+                  const SizedBox(height: 10),
 
                   /// App Title
                   const CustomText(
@@ -61,7 +61,7 @@ class UserAddressView extends StatelessWidget {
                     color: Colors.white,
                   ),
 
-                  const SizedBox(height: 35),
+                  const SizedBox(height: 25),
 
                   /// White Card Container
                   Container(
@@ -70,24 +70,28 @@ class UserAddressView extends StatelessWidget {
                         horizontal: 20, vertical: 25),
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(25),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const CustomText(
-                          text: "Delivery Address",
-                          fontSize: 22,
-                          weight: FontWeight.w500,
-                          letterSpacing: -1,
-                        ),
-                        const SizedBox(height: 8),
-                        const CustomText(
-                          text: "Where should we deliver your \nwater?",
-                          fontSize: 15,
-                          color: Color(0xff6A7282),
-                          weight: FontWeight.w500,
-                        ),
+                         Center(
+                           child: CustomText(
+                            text: "Delivery Address",
+                            fontSize: 20,
+                            weight: FontWeight.w500,
+                            letterSpacing: -1,
+                                                   ),
+                         ),
+                        const SizedBox(height: 3),
+                         Center(
+                           child: CustomText(
+                            text: "Where should we deliver your water?",
+                            fontSize: 13,
+                            color: Color(0xff6A7282),
+                            weight: FontWeight.w500,
+                                                   ),
+                         ),
                         const SizedBox(height: 20),
                         CustomText(
                           text: 'Address',
@@ -105,11 +109,12 @@ class UserAddressView extends StatelessWidget {
                         Row(
                           children: [
                             Icon(Icons.location_pin,
-                                color: ColorConstants.themeColor),
+                                color: ColorConstants.themeColor, size: 18,),
                             SizedBox(width: 5),
                             CustomText(
                               text: 'Use current location',
                               weight: FontWeight.w500,
+                              fontSize: 13,
                               color: ColorConstants.themeColor,
                             )
                           ],
@@ -118,7 +123,7 @@ class UserAddressView extends StatelessWidget {
 
                         // Send OTP Button
                         CommonButton(
-                          onPressed: () {Get.to(BottomNavigation(index: 0,));},
+                          onPressed: () {Get.to(BottomNavigation(index: 0));},
                           title: "Continue",
                         ),
                       ],
@@ -131,8 +136,8 @@ class UserAddressView extends StatelessWidget {
                   const Center(
                     child: CustomText(
                       text:
-                          "By continuing, you agree to our Terms & Privacy Policy",
-                      fontSize: 14,
+                          "By continuing, you agree to our Terms & \nPrivacy Policy",
+                      fontSize: 12,
                       color: Colors.white,
                       textAlign: TextAlign.center,
                       weight: FontWeight.w500,
