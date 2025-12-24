@@ -44,7 +44,7 @@ class DashboardView extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   CustomText(
-                                    text: 'Good Morning',
+                                    text: 'Welcome',
                                     color: Colors.white,
                                     fontSize: 15,
                                     weight: FontWeight.w400,

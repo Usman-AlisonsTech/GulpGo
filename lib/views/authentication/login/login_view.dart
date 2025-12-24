@@ -1,9 +1,10 @@
 import 'package:aqua_flow/utils/constants.dart';
-import 'package:aqua_flow/views/authentication/otp/otp_view.dart';
+import 'package:aqua_flow/views/authentication/authentication_controller.dart';
 import 'package:aqua_flow/widgets/common_button.dart';
 import 'package:aqua_flow/widgets/custom_text.dart';
 import 'package:aqua_flow/widgets/custom_textfield.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class LoginView extends StatelessWidget {
@@ -12,6 +13,7 @@ class LoginView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final controller = Get.find<AuthenticationController>();
 
     return Scaffold(
       body: Container(
@@ -95,24 +97,41 @@ class LoginView extends StatelessWidget {
                                                    ),
                          ),
                         const SizedBox(height: 20),
-          
-                        /// Phone TextField
-                        CustomTextField(
-                          hintText: "+1 (555) 000-0000",
+                        Form(
+                          key: controller.userNameformKey,
+                          child: CustomTextField(
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly,
+                            ],
+                            hintText: "+1 (555) 000-0000",
+                            controller: controller.numberController,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter your number';
+                              }
+                              return null;
+                            },
                           prefixIcon: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                             child: Icon(Icons.phone_outlined, color: ColorConstants.greyColor,size: 20),
                           ),
+                          ),
                         ),
-          
+                      
                         const SizedBox(height: 25),
-          
+                        
                         /// Send OTP Button
-                        CommonButton(
-                          onPressed: () {Get.to(OtpView());},
-                          title: "Send OTP",
-                          
-                        ),
+                        Obx(()=>
+                          CommonButton(
+                            isLoading: controller.isLoading.value,
+                            onPressed: () {
+                              FocusScope.of(context).unfocus();
+                              controller.login(context);
+                            },
+                            title: "Send OTP",
+                            
+                          ),),
           
                         const SizedBox(height: 15),
           

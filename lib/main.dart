@@ -1,3 +1,4 @@
+import 'package:aqua_flow/views/authentication/authentication_controller.dart';
 import 'package:aqua_flow/views/authentication/login/login_view.dart';
 import 'package:aqua_flow/views/bottombar/bottom_navigation_controller.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialBinding: InitialBindings(),
       theme: ThemeData(
-        // scaffoldBackgroundColor: Color(0xffF0F1F3),
         scaffoldBackgroundColor: Colors.white,
       ),
       home: LoginView(),
@@ -33,6 +33,7 @@ class MyApp extends StatelessWidget {
 class InitialBindings implements Bindings {
   @override
   void dependencies() {
+    Get.put(AuthenticationController(), permanent: true);
     Get.put(BottomNavbarController(), permanent: true);
   }
 }

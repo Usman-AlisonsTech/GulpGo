@@ -1,5 +1,14 @@
 import 'package:flutter/material.dart';
 
+class ApiConstants {
+  static String baseUrl = 'http://192.168.50.227:8001/api';
+  static String login = '/auth/customers/send-otp';
+  static String verifyOtp = '/auth/customers/verify-otp';
+  static String resendOtp = '/auth/customers/resend-otp';
+  static String getProducts = '/products/all';
+  static String createOrder = '/customer/orders/orders/create';
+  static String number = '03350024090';
+}
 class ColorConstants {
   static Color buttoncolor = Color(0xff285FAA);
   // static Color buttoncolor = Colors.green;

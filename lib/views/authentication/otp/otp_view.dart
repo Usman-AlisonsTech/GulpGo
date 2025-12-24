@@ -1,5 +1,5 @@
 import 'package:aqua_flow/utils/constants.dart';
-import 'package:aqua_flow/views/authentication/address/user_address_view.dart';
+import 'package:aqua_flow/views/authentication/authentication_controller.dart';
 import 'package:aqua_flow/widgets/common_button.dart';
 import 'package:aqua_flow/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +17,7 @@ class _OtpViewState extends State<OtpView> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+     final controller = Get.find<AuthenticationController>();
 
     return Scaffold(
       body: Container(
@@ -90,7 +91,7 @@ class _OtpViewState extends State<OtpView> {
                         const SizedBox(height: 8),
                          Center(
                            child: CustomText(
-                            text: "Enter your code sent to 0310129301",
+                            text: "Enter your code sent to ${controller.numberController.text}",
                             fontSize: 13,
                             color: Color(0xff6A7282),
                             weight: FontWeight.w500,
@@ -98,7 +99,7 @@ class _OtpViewState extends State<OtpView> {
                          ),
                         const SizedBox(height: 20),
 
-            Center(
+          Center(
                 child:
                 Pinput(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -153,17 +154,17 @@ class _OtpViewState extends State<OtpView> {
                 keyboardType: TextInputType.number,
                 onChanged: (value) {
                   setState(() {
-                    // controller.otp = value;
-                    // controller.isOtpValid.value = value.length == 6;
+                    controller.otp = value;
+                    controller.isOtpValid.value = value.length == 6;
                   });
                 },
                 onCompleted: (pin) {
                   setState(() {
-                //     controller.otp = pin;
-                //     controller.isOtpValid.value = pin.length == 6;
-                //      if (!controller.isVerifyLoading.value) {
-                //     controller.verifyOtp(context);
-                //  }
+                    controller.otp = pin;
+                    controller.isOtpValid.value = pin.length == 6;
+                     if (!controller.isVerifyLoading.value) {
+                    controller.verifyOtp(context);
+                 }
                   });
                 },
               )
@@ -173,23 +174,72 @@ class _OtpViewState extends State<OtpView> {
                         const SizedBox(height: 25),
           
                         /// Send OTP Button
-                        CommonButton(
-                          onPressed: () {Get.to(UserAddressView());},
-                          title: "Verify OTP",
-                          
-                        ),
-          
+            
                         const SizedBox(height: 15),
           
-                        /// Info Text
-                         Center(
-                          child: CustomText(
-                            fontSize: 13,
-                            weight: FontWeight.w500,
-                            text: "Resent OTP",
-                            color: ColorConstants.themeColor,
+                       Obx(
+              () =>  CommonButton(
+                  title: "Verify OTP",
+                  isLoading: controller.isVerifyLoading.value,
+                  bgColor: controller.isOtpValid.value
+                      ? ColorConstants.buttoncolor
+                      : Color(0xff8692B4),
+                  borderColor: controller.isOtpValid.value
+                      ? ColorConstants.buttoncolor
+                      : Color(0xff8692B4),
+                  fontSize: 14,
+                  textWeight: FontWeight.w500,
+                  buttonShade: const Color(0xffFFFFFF),
+                  borderRadius: 10,
+                  onPressed: controller.isOtpValid.value
+                      ? () {
+                          controller.verifyOtp(context);
+                        }
+                      : null,
+                ),
+              ),
+          
+             const SizedBox(height: 15),
+            Obx(() {
+              return Center(
+                child: GestureDetector(
+                  onTap: controller.canResend.value
+                      ? () {
+                          controller.startResendTimer();
+                          controller.resendOTP(context);
+                        }
+                      : null,
+                  child: Text.rich(
+                    TextSpan(
+                      style: const TextStyle(
+                         fontSize: 13,
+                        fontWeight: FontWeight.w500,
+                        decoration: TextDecoration.underline,
+                        decorationColor: Color(0xff1E3064),
+                        decorationThickness: 1.5,
+                        fontFamily: 'Poppins',
+                      ),
+                      children: [
+                        TextSpan(
+                          text: 'Resend OTP ',
+                          style: TextStyle(
+                           color: ColorConstants.themeColor,
                           ),
                         ),
+                        if (!controller.canResend.value)
+                          TextSpan(
+                            text:
+                                '(00:${controller.remainingSeconds.value.toString().padLeft(2, '0')})',
+                            style: TextStyle(
+                               color: ColorConstants.themeColor,
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            }),
                       ],
                     ),
                   ),
