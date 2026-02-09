@@ -2,7 +2,10 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:aqua_flow/exceptions/app_exceptions.dart';
+import 'package:aqua_flow/views/authentication/login/login_view.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 
 class NetworkApiService {
@@ -34,6 +37,27 @@ class NetworkApiService {
     try {
       final response = await http
           .post(Uri.parse(url),
+              body: json.encode(data),
+              headers: {
+                "Content-Type": "application/json", 'Authorization': 'Bearer $token'
+              }).timeout(const Duration(seconds: 30));
+
+      jsonResponse = await returnResponse(response);
+    } on SocketException {
+      throw NoInternetException('No Internet');
+    } on TimeoutException {
+      throw RequestTimeoutException('Request Time Out');
+    }
+    return jsonResponse;
+  }
+
+
+  Future<dynamic> putApi(String url, data, String token) async {
+    print(url);
+    dynamic jsonResponse;
+    try {
+      final response = await http
+          .put(Uri.parse(url),
               body: json.encode(data),
               headers: {
                 "Content-Type": "application/json", 'Authorization': 'Bearer $token'
@@ -88,11 +112,11 @@ class NetworkApiService {
         if (!_isSessionExpiredHandled) {
           _isSessionExpiredHandled = true;
 
-          // final prefs = await SharedPreferences.getInstance();
-          // await prefs.remove('token');
-          // Future.delayed(const Duration(milliseconds: 200), () {
-          //   Get.offAll(() => SessionExpireView());
-          // });
+          final prefs = await SharedPreferences.getInstance();
+          await prefs.remove('token');
+          Future.delayed(const Duration(milliseconds: 200), () {
+            Get.offAll(() => LoginView());
+          });
         }
 
         throw UnAuthorisedException('Session expired');

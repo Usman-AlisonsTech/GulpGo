@@ -52,7 +52,7 @@ class _OtpViewState extends State<OtpView> {
           
                   /// App Title
                   const CustomText(
-                    text: "AquaFlow",
+                    text: "GulpGo",
                     fontSize: 30,
                     weight: FontWeight.w500,
                     color: Colors.white,

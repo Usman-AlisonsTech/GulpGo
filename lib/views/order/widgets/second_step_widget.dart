@@ -55,56 +55,89 @@ class _SecondStepWidgetState extends State<SecondStepWidget> {
 
         const SizedBox(height: 15),
 
-        Obx(() {
-          if (controller.totalDeposit.value > 0) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CustomText(
-                  text: "Total Deposit Amount (PKR)",
-                  fontSize: 14,
-                  weight: FontWeight.w500,
-                  color: ColorConstants.darkGreyColor,
-                ),
-                SizedBox(height: 10),
-                CustomTextField(
-                  borderColor: ColorConstants.lightGrey,
-                  controller: TextEditingController(
-                    text: controller.totalDeposit.value.toStringAsFixed(0),
-                  ),
-                  readOnly: true,
-                ),
-                const SizedBox(height: 15),
-              ],
-            );
-          }
-          return const SizedBox();
-        }),
+        // Obx(() {
+        //   if (controller.totalDeposit.value > 0) {
+        //     return Column(
+        //       crossAxisAlignment: CrossAxisAlignment.start,
+        //       children: [
+        //         CustomText(
+        //           text: "Total Deposit Amount (PKR)",
+        //           fontSize: 14,
+        //           weight: FontWeight.w500,
+        //           color: ColorConstants.darkGreyColor,
+        //         ),
+        //         SizedBox(height: 10),
+        //         CustomTextField(
+        //           borderColor: ColorConstants.lightGrey,
+        //           controller: TextEditingController(
+        //             text: controller.totalDeposit.value.toStringAsFixed(0),
+        //           ),
+        //           readOnly: true,
+        //         ),
+        //         const SizedBox(height: 15),
+        //       ],
+        //     );
+        //   }
+        //   return const SizedBox();
+        // }),
 
-        if (controller.withBottles.value)
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CustomText(
-                text: "Deposit Amount Taking (PKR)*",
-                fontSize: 14,
-                weight: FontWeight.w500,
-                color: ColorConstants.darkGreyColor,
-              ),
-              SizedBox(height: 10),
-              CustomTextField(
-                borderColor: ColorConstants.lightGrey,
-                keyboardType: TextInputType.number,
-                onChanged: (value) {
-                  print('usman');
-                  final depositTaking = int.tryParse(value) ?? 0;
-                  controller.depositAmountTaking.value = depositTaking;
-                  controller.updateGrandTotal();
-                },
-              ),
-              const SizedBox(height: 15),
-            ],
+        Obx(() {
+  if (controller.totalDeposit.value > 0) {
+
+    // 🔥 Total deposit ki value hi grand total me use hogi
+    controller.depositAmountTaking.value =
+        controller.totalDeposit.value.toInt();
+    controller.updateGrandTotal();
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        CustomText(
+          text: "Total Deposit Amount (PKR)",
+          fontSize: 14,
+          weight: FontWeight.w500,
+          color: ColorConstants.darkGreyColor,
+        ),
+        SizedBox(height: 10),
+        CustomTextField(
+          borderColor: ColorConstants.lightGrey,
+          controller: TextEditingController(
+            text: controller.totalDeposit.value.toStringAsFixed(0),
           ),
+          readOnly: true,
+        ),
+        const SizedBox(height: 15),
+      ],
+    );
+  }
+  return const SizedBox();
+}),
+
+
+        // if (controller.withBottles.value)
+        //   Column(
+        //     crossAxisAlignment: CrossAxisAlignment.start,
+        //     children: [
+        //       CustomText(
+        //         text: "Deposit Amount Taking (PKR)*",
+        //         fontSize: 14,
+        //         weight: FontWeight.w500,
+        //         color: ColorConstants.darkGreyColor,
+        //       ),
+        //       SizedBox(height: 10),
+        //       CustomTextField(
+        //         borderColor: ColorConstants.lightGrey,
+        //         keyboardType: TextInputType.number,
+        //         onChanged: (value) {
+        //           print('usman');
+        //           final depositTaking = int.tryParse(value) ?? 0;
+        //           controller.depositAmountTaking.value = depositTaking;
+        //           controller.updateGrandTotal();
+        //         },
+        //       ),
+        //       const SizedBox(height: 15),
+        //     ],
+        //   ),
 
         // Delivery Address
         CustomText(

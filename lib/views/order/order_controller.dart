@@ -36,6 +36,8 @@ class OrderController extends GetxController {
     String token = prefs.getString('token') ?? '';
     isLoading.value = true;
 
+    print(token);
+
     try {
       final response = await apiService.getApi(
         '${ApiConstants.baseUrl + ApiConstants.getProducts}',

@@ -9,6 +9,7 @@ import 'package:aqua_flow/views/authentication/otp/otp_view.dart';
 import 'package:aqua_flow/views/bottombar/bottom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthenticationController extends GetxController {
@@ -22,6 +23,7 @@ class AuthenticationController extends GetxController {
   RxBool canResend = true.obs;
   String? otp;
   RxBool isOtpValid = false.obs;
+  final token = GetStorage().read('fcmToken');
 
   void login(BuildContext context) async {
     if (!userNameformKey.currentState!.validate()) {
@@ -63,8 +65,9 @@ class AuthenticationController extends GetxController {
        if (response['customer'] != null && response['customer'] is Map && response['customer'].isNotEmpty) {
         final token = response['token'];
 
-        await _saveToken(token, jsonEncode(response['customer']));
+        await _saveToken(token, jsonEncode(response['customer']),jsonEncode(response['companyAdmin']));
         NetworkApiService.resetSessionFlag();
+        await sendFCMToken();
 
         Get.offAll(BottomNavigation(index: 0));
        
@@ -133,15 +136,39 @@ class AuthenticationController extends GetxController {
     });
   }
 
-   Future<void> _saveToken(String? token, customerdata) async {
+   Future<void> _saveToken(String? token, customerdata, companyAdminData) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (token != null && token.isNotEmpty) {
       await prefs.setString('token', token);
       await prefs.setString("customerData", customerdata);
+      await prefs.setString("companyAdminData", companyAdminData);
       print("Token saved: $token");
       print("customerData: $customerdata");
+      print("companyAdminData: $companyAdminData");
     }
   }
+
+   Future<void> sendFCMToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String driverToken = prefs.getString('token') ?? '';
+    var formData = {
+        "fcmToken": token??'',
+    };
+    print(formData);
+    try {
+      final response = await apiService.postApi('${ApiConstants.baseUrl+ApiConstants.sentFcmToken}',formData,driverToken);
+      print(response);
+      if (response['success'] == true ) {
+        print('fcm token sent in api successfully');
+      }else {
+        print(response['message']);
+      }
+     
+    } catch (e) {
+      print('fcm token api error: $e');
+    }
+  }
+
   @override
   void onClose() {
     _timer?.cancel();

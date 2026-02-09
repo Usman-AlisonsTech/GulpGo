@@ -21,7 +21,7 @@ class LoginView extends StatelessWidget {
         height: size.height,
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [ColorConstants.gradientColor1, ColorConstants.gradientColor2,],
+            colors: [ColorConstants.gradientColor1, ColorConstants.gradientColor2],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -50,7 +50,7 @@ class LoginView extends StatelessWidget {
           
                   /// App Title
                   const CustomText(
-                    text: "AquaFlow",
+                    text: "GulpGo",
                     fontSize: 30,
                     weight: FontWeight.w500,
                     color: Colors.white,

@@ -69,17 +69,8 @@ class _ThirdStepWidgetState extends State<ThirdStepWidget> {
                 if (controller.withBottles.value &&
                     controller.totalDeposit.value > 0)
                   _buildPriceRow(
-                    "Total Deposit Available",
+                    "Total Deposit Taking",
                     "PKR ${controller.totalDeposit.value}",
-                    isOrderedList: true,
-                  ),
-
-                // Deposit Taking
-                if (controller.withBottles.value &&
-                    controller.depositAmountTaking.value > 0)
-                  _buildPriceRow(
-                    "Deposit Taking",
-                    "PKR ${controller.depositAmountTaking.value}",
                     isOrderedList: true,
                   ),
 

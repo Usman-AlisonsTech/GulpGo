@@ -29,8 +29,6 @@ class _BottomNavigationState extends State<BottomNavigation> {
 
   @override
   Widget build(BuildContext context) {
-    double screenHeight = MediaQuery.of(context).size.height;
-    final bool isLargeScreen = screenHeight > 750;
     return GetBuilder<BottomNavbarController>(
       id: 'main',
       builder: (c) => PopScope(
@@ -47,7 +45,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
                     color: Colors.white,
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.2),
+                        color: Colors.black.withValues(alpha:0.2),
                         blurRadius: 10,
                         offset: const Offset(0, 4),
                       ),
@@ -151,7 +149,6 @@ class _BottomNavigationState extends State<BottomNavigation> {
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 children: controller.listOfScreens.asMap().entries.map((entry) {
-                  final index = entry.key;
                   final screen = entry.value;
                   return Expanded(
                     flex: 1,
@@ -161,12 +158,6 @@ class _BottomNavigationState extends State<BottomNavigation> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           const SizedBox(height: 2),
-                          // SvgPicture.asset(
-                          //   screen.icon,
-                          //   height: screen.height,
-                          //   width: screen.width,
-                          //   color: Colors.white,
-                          // ),
                           Icon(screen.icon,color: controller.currentIndex.value == screen.index? ColorConstants.themeColor : ColorConstants.darkGreyColor, size: screen.width,),
                           const SizedBox(height: 6),
                           controller.currentIndex.value == screen.index

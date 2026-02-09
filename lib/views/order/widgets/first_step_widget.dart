@@ -26,9 +26,24 @@ class FirstStepWidget extends StatelessWidget {
 
       final allProducts = controller.allProductData.value?.products ?? [];
 
-      final products = controller.isRecurring.value
-          ? allProducts.where((p) => p.isReusable == true).toList()
-          : allProducts;
+      // final products = controller.isRecurring.value
+      //     ? allProducts.where((p) => p.isReusable == true).toList()
+      //     : allProducts;
+
+      final products = allProducts.where((p) {
+        /// Recurring order → only reusable
+        if (controller.isRecurring.value && p.isReusable != true) {
+          return false;
+        }
+
+        /// With bottles → only products having deposit
+        if (controller.withBottles.value && (p.isReusable !=true)) {
+          return false;
+        }
+
+        return true;
+      }).toList();
+
 
       if (products.isEmpty) {
         return Center(
@@ -214,7 +229,7 @@ class FirstStepWidget extends StatelessWidget {
                 color: const Color(0xFFE3F2FD),
                 child: CachedNetworkImage(
                   imageUrl: product.image != null
-                      ? "http://192.168.50.227:8001${product.image}"
+                      ? "${ApiConstants.imageBaseUrl}${product.image}"
                       : '',
                   fit: BoxFit.cover,
                   placeholder: (_, __) => const Center(
@@ -246,6 +261,14 @@ class FirstStepWidget extends StatelessWidget {
                       text: product.size ?? '',
                       fontSize: 11,
                       color: Colors.grey,
+                    ),
+                    if(product.isReusable == true)
+                    Row(
+                      children: [
+                        Icon(Icons.recycling, size: 15, color: Colors.green),
+                        SizedBox(width: 5),
+                        CustomText(text: product.isReusable == true? 'Reusable': '', color: Colors.green,fontSize: 11,),
+                      ],
                     ),
                     Obx(() {
                       if (!controller.withBottles.value ||
