@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:883576099323:android:1c8ce3065306ba19c9bb5e",
+        "mobilesdk_app_id": "1:883576099323:android:07c59b0a0cd3296ec9bb5e",
         "android_client_info": {
-          "package_name": "com.aquaflow.alisons"
+          "package_name": "com.aquaflowdriver.alisons"
         }
       },
       "oauth_client": [],
@@ -26,9 +26,9 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:883576099323:android:07c59b0a0cd3296ec9bb5e",
+        "mobilesdk_app_id": "1:883576099323:android:e3c19921ae4d560ec9bb5e",
         "android_client_info": {
-          "package_name": "com.aquaflowdriver.alisons"
+          "package_name": "com.gulpgo.alisons"
         }
       },
       "oauth_client": [],

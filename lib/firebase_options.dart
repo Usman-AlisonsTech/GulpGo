@@ -59,10 +59,11 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyCFaqtPW2rT4BVoytHRdHrTSBqXQNHAVTc',
-    appId: '1:883576099323:ios:2b943240e3ae630ec9bb5e',
+    appId: '1:883576099323:ios:9b40264260cfd9abc9bb5e',
     messagingSenderId: '883576099323',
     projectId: 'waterdeliverynotifications',
     storageBucket: 'waterdeliverynotifications.firebasestorage.app',
-    iosBundleId: 'com.aquaflow.alisons',
+    iosBundleId: 'com.alisons.gulpgo',
   );
+
 }

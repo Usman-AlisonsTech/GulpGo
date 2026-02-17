@@ -1,4 +1,4 @@
-package com.aquaflow.alisons
+package com.gulpgo.alisons
 
 import io.flutter.app.FlutterApplication
 

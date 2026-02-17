@@ -9,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.aquaflow.alisons</string>
+	<string>com.alisons.gulpgo</string>
 	<key>PROJECT_ID</key>
 	<string>waterdeliverynotifications</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:883576099323:ios:2b943240e3ae630ec9bb5e</string>
+	<string>1:883576099323:ios:9b40264260cfd9abc9bb5e</string>
 </dict>
 </plist>

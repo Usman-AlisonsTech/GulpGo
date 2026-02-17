@@ -7,7 +7,7 @@ plugins {
     id "dev.flutter.flutter-gradle-plugin"
 }
 android {
-    namespace  'com.aquaflow.alisons'
+    namespace  'com.gulpgo.alisons'
     compileSdk 35
     ndkVersion = "26.1.10909125"
 
@@ -30,7 +30,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.aquaflow.alisons"
+        applicationId = "com.gulpgo.alisons"
         minSdkVersion flutter.minSdkVersion
         targetSdkVersion 35
         multiDexEnabled true
