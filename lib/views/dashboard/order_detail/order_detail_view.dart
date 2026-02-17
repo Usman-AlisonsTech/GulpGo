@@ -327,13 +327,22 @@ class OrderDetailView extends StatelessWidget {
                       size,
                       false,
                     ),
+                    if(orders.totalDeposit! > 0)...[
+                    Divider(height: size.height * 0.03),
+                    OrderDetailWidgets().buildPaymentRow(
+                      'Total Deposit',
+                      'Rs ${HelperMethods().formatNumber(orders.totalDeposit??0)}',
+                      size,
+                      false,
+                    ),
+                    ],
                     Divider(height: size.height * 0.03),
                     OrderDetailWidgets().buildPaymentRow(
                       'Total Amount',
                       'Rs ${HelperMethods().formatNumber(orders.totalAmount)}',
                       size,
                       false,
-                    ),
+                    ),       
                   ],
                 ),
               ),

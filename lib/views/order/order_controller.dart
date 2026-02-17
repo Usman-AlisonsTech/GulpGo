@@ -19,6 +19,11 @@ class OrderController extends GetxController {
   final addressController = TextEditingController();
   RxInt currentStep = 1.obs;
 
+  // RxString bottlePreference = "auto".obs;
+  // RxInt customNewBottles = 0.obs;
+  // RxInt customRefillBottles = 0.obs;
+  // RxInt returnEmpties = 0.obs;
+
   RxBool isRecurring = false.obs;
   RxBool withBottles = false.obs;
 
@@ -110,12 +115,16 @@ class OrderController extends GetxController {
           ?.firstWhereOrNull((p) => p.id == productId);
       if (product == null) return;
 
-      // 🔹 Recurring filter
+      // 🔹 Ignore non-reusable if recurring
       if (isRecurring && product.isReusable != true) return;
+
+      // 🔹 Ignore non-reusable if withBottles
+      if (withBottles && product.isReusable != true) return;
 
       /// price calculation
       amount += (product.price ?? 0) * qty;
 
+      /// deposit calculation only for reusable products
       if (withBottles && (product.depositAmount ?? 0) > 0) {
         deposit += (product.depositAmount ?? 0) * qty;
       }
@@ -155,11 +164,53 @@ class OrderController extends GetxController {
     return quantities.values.any((qty) => qty > 0);
   }
 
+  // int get totalItems {
+  //   int count = 0;
+  //   quantities.forEach((_, qty) {
+  //     count += qty;
+  //   });
+  //   return count;
+  // }
+
+//   int get totalItems {
+//   int count = 0;
+
+//   quantities.forEach((productId, qty) {
+//     if (qty == 0) return;
+
+//     final product = allProductData.value?.products
+//         ?.firstWhereOrNull((p) => p.id == productId);
+
+//     if (product == null) return;
+
+//     /// ignore non reusable when recurring OR with bottles filter active
+//     if (isRecurring.value && product.isReusable != true) return;
+
+//     if (withBottles.value && product.isReusable != true) return;
+
+//     count += qty;
+//   });
+
+//   return count;
+// }
+
   int get totalItems {
     int count = 0;
-    quantities.forEach((_, qty) {
+
+    quantities.forEach((productId, qty) {
+      if (qty == 0) return;
+
+      final product = allProductData.value?.products
+          ?.firstWhereOrNull((p) => p.id == productId);
+      if (product == null) return;
+
+      // ignore non-reusable for recurring or withBottles
+      if (isRecurring.value && product.isReusable != true) return;
+      if (withBottles.value && product.isReusable != true) return;
+
       count += qty;
     });
+
     return count;
   }
 
@@ -181,9 +232,38 @@ class OrderController extends GetxController {
     });
   }
 
+  // void applyBottlePreferenceLogic() {
+  //   final int totalQty = totalItems;
+
+  //   switch (bottlePreference.value) {
+  //     case "auto":
+  //       depositAmountTaking.value = totalDeposit.value;
+  //       break;
+
+  //     case "new_only":
+  //       depositAmountTaking.value = totalDeposit.value;
+  //       break;
+
+  //     case "custom":
+  //       if (customNewBottles.value + customRefillBottles.value != totalQty) {
+  //         return;
+  //       }
+
+  //       if (totalQty == 0) return;
+
+  //       final double perBottleDeposit = totalDeposit.value / totalQty;
+
+  //       depositAmountTaking.value =
+  //           (perBottleDeposit * customNewBottles.value).round();
+  //       break;
+  //   }
+
+  //   updateGrandTotal();
+  // }
+
   void createOrder(BuildContext context) async {
     /// ---------------- VALIDATIONS ----------------
-
+    print('create order call');
     if (isRecurring.value && hasNonReusable) {
       Get.snackbar(
           "Error", "Recurring orders cannot include non-reusable items");
@@ -198,12 +278,24 @@ class OrderController extends GetxController {
     /// ---------------- ITEMS PAYLOAD ----------------
 
     final items = quantities.entries
-        .where((e) => e.value > 0)
-        .map((e) => {
-              "productId": e.key,
-              "quantity": e.value,
-            })
-        .toList();
+      .where((e) {
+        if (e.value == 0) return false;
+
+        final product = allProductData.value?.products
+            ?.firstWhereOrNull((p) => p.id == e.key);
+        if (product == null) return false;
+
+        // apply same filters as UI/calculation
+        if (isRecurring.value && product.isReusable != true) return false;
+        if (withBottles.value && product.isReusable != true) return false;
+
+        return true;
+      })
+      .map((e) => {
+            "productId": e.key,
+            "quantity": e.value,
+          })
+      .toList();
 
     /// ---------------- FORM DATA ----------------
 
@@ -217,6 +309,26 @@ class OrderController extends GetxController {
     if (withBottles.value && depositAmountTaking.value > 0) {
       formData["acceptableDepositAmount"] = depositAmountTaking.value;
     }
+
+    // if (withBottles.value) {
+    //   formData["bottlePreference"] = bottlePreference.value;
+
+    //   formData["acceptableDepositAmount"] = depositAmountTaking.value;
+
+    //   if (bottlePreference.value == "custom") {
+    //     if (customNewBottles.value + customRefillBottles.value != totalItems) {
+    //       Get.snackbar("Error", "Custom bottle total must match quantity");
+    //       return;
+    //     }
+
+    //     formData["customNewBottles"] = customNewBottles.value;
+    //     formData["customRefillBottles"] = customRefillBottles.value;
+    //   }
+
+    //   if (returnEmpties.value > 0) {
+    //     formData["returnEmpties"] = returnEmpties.value;
+    //   }
+    // }
 
     // Recurring payload
     if (isRecurring.value) {

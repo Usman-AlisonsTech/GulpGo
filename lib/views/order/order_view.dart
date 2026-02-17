@@ -22,9 +22,17 @@ class _OrderViewState extends State<OrderView> {
   @override
   void initState() {
     super.initState();
+    controller.goToStep(1);
     controller.fetchAllProducts(context);
     controller.loadCustomerFromLocal();
   }
+
+  @override
+  void dispose() {
+    controller.goToStep(1);
+    super.dispose();
+  }
+
 
   @override
   Widget build(BuildContext context) {

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class ApiConstants {
   // baseUrls
-  static String baseUrl = 'http://192.168.50.227:8001/api';
-  static String imageBaseUrl = 'http://192.168.50.227:8001';
-  // static String baseUrl = 'https://aquaflow.alisonstech-dev.com/backend/api';
-  // static String imageBaseUrl = 'https://aquaflow.alisonstech-dev.com/backend';
+  // static String baseUrl = 'http://192.168.50.227:8001/api';
+  // static String imageBaseUrl = 'http://192.168.50.227:8001';
+  static String baseUrl = 'https://aquaflow.alisonstech-dev.com/backend/api';
+  static String imageBaseUrl = 'https://aquaflow.alisonstech-dev.com/backend';
   
   static String login = '/auth/customers/send-otp';
   static String verifyOtp = '/auth/customers/verify-otp';
