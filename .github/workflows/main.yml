@@ -7,24 +7,53 @@ on:
       - main
       - master
       - develop
+
 name: "Build & Release"
+
 jobs:
   build:
     name: Build & Release
     runs-on: macos-latest
+
     steps:
+      # 1️⃣ Checkout the repo
       - uses: actions/checkout@v3
+
+      # 2️⃣ Setup Java
       - uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
           java-version: '17'
+
+      # 3️⃣ Setup Flutter
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
           architecture: x64
 
-      - run: flutter build apk --release
-      - run: |
+      # 4️⃣ Flutter dependencies
+      - run: flutter pub get
+
+      # 5️⃣ Decode Keystore from secret
+      - name: Decode Keystore
+        run: |
+          echo "${{ secrets.ANDROID_KEYSTORE }}" | base64 --decode > android/app/upload-keystore.jks
+
+      # 6️⃣ Create key.properties dynamically
+      - name: Create key.properties
+        run: |
+          echo "storePassword=${{ secrets.KEYSTORE_PASSWORD }}" > android/key.properties
+          echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> android/key.properties
+          echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> android/key.properties
+          echo "storeFile=upload-keystore.jks" >> android/key.properties
+
+      # 7️⃣ Build Android APK
+      - name: Build Android APK
+        run: flutter build apk --release
+
+      # 8️⃣ Build iOS IPA (no code signing)
+      - name: Build iOS IPA
+        run: |
           flutter build ios --no-codesign
           cd build/ios/iphoneos
           mkdir Payload
@@ -32,6 +61,8 @@ jobs:
           ln -s ../Runner.app
           cd ..
           zip -r app.ipa Payload
+
+      # 9️⃣ Push APK & IPA to GitHub Releases
       - name: Push to Releases
         uses: ncipollo/release-action@v1
         with:

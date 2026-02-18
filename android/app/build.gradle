@@ -9,7 +9,7 @@ plugins {
 android {
     namespace  'com.gulpgo.alisons'
     compileSdk 35
-    ndkVersion = "26.1.10909125"
+    ndkVersion = "28.2.13676358"
 
     def keystorePropertiesFile = rootProject.file("android/key.properties")
     def keystoreProperties = new Properties()
@@ -38,14 +38,24 @@ android {
         versionName "1.0.0"
     }
 
-  signingConfigs {
-        release {
-            keyAlias 'upload' 
-            keyPassword '123456' 
-            storeFile file('upload-keystore.jks')  
-            storePassword '123456' 
-        }
+//   signingConfigs {
+//         release {
+//             keyAlias 'upload' 
+//             keyPassword '123456' 
+//             storeFile file('upload-keystore.jks')  
+//             storePassword '123456' 
+//         }
+//     }
+
+
+ signingConfigs {
+    release {
+        keyAlias keystoreProperties['keyAlias']
+        keyPassword keystoreProperties['keyPassword']
+        storeFile file(keystoreProperties['storeFile'])
+        storePassword keystoreProperties['storePassword']
     }
+}
 
     buildTypes {
     release {
