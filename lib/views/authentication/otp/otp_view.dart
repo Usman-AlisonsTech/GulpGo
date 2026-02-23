@@ -40,12 +40,12 @@ class _OtpViewState extends State<OtpView> {
                 children: [
                   /// App Icon
                  Container(
-                    padding: const EdgeInsets.all(15),
+                    padding: const EdgeInsets.all(10),
                     decoration: const BoxDecoration(
                       color: Colors.white,
                       shape: BoxShape.circle,
                     ),
-                    child: Image.asset('assets/png/app_logo.png',width: 30,),
+                    child: Image.asset('assets/png/app_logo.png',width: 50,),
                   ),
           
                   const SizedBox(height: 10),
