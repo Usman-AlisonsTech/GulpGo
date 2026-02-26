@@ -104,7 +104,7 @@ class LoginView extends StatelessWidget {
                             inputFormatters: [
                               FilteringTextInputFormatter.digitsOnly,
                             ],
-                            hintText: "+1 (555) 000-0000",
+                            hintText: "+92 0000000000",
                             controller: controller.numberController,
                             validator: (value) {
                               if (value == null || value.isEmpty) {

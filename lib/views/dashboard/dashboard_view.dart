@@ -214,50 +214,57 @@ class _DashboardViewState extends State<DashboardView> {
                     ? controller.pendingOrders
                     : controller.recurringOrders;
 
-                return SingleChildScrollView(
-                  controller: controller.scrollController,
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: ScreenConstants.horizontalPadding),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        if (orders.isEmpty && !controller.isLoading.value)
-                          Center(
-                            child: Container(
-                              margin: EdgeInsets.only(top: 100),
-                              child: CustomText(
-                                text: isActiveOrdersTab
-                                    ? 'No Orders Found.'
-                                    : 'No Recurring Orders Found.',
-                                color: ColorConstants.darkGreyColor,
+                return RefreshIndicator(
+                   onRefresh: ()async{
+                      Future.wait([    
+                      controller.fetchCustomerOrders(),
+                     controller.fetchRecurringUpcoming()
+                ]);
+              },
+                  child: SingleChildScrollView(
+                    controller: controller.scrollController,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: ScreenConstants.horizontalPadding),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          if (orders.isEmpty && !controller.isLoading.value)
+                            Center(
+                              child: Container(
+                                margin: EdgeInsets.only(top: 100),
+                                child: CustomText(
+                                  text: isActiveOrdersTab
+                                      ? 'No Orders Found.'
+                                      : 'No Recurring Orders Found.',
+                                  color: ColorConstants.darkGreyColor,
+                                ),
                               ),
                             ),
+                          /// Orders List
+                          ListView.separated(
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount: orders.length,
+                            separatorBuilder: (_, __) => SizedBox(height: 15),
+                            itemBuilder: (context, index) {
+                              print(orders[index]);
+                              return orderContainer(orders[index], context,
+                                  isRecurring: !isActiveOrdersTab);
+                            },
                           ),
-
-                        /// Orders List
-                        ListView.separated(
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          itemCount: orders.length,
-                          separatorBuilder: (_, __) => SizedBox(height: 15),
-                          itemBuilder: (context, index) {
-                            print(orders[index]);
-                            return orderContainer(orders[index], context,
-                                isRecurring: !isActiveOrdersTab);
-                          },
-                        ),
-
-                        if (controller.isLoadingMore.value && isActiveOrdersTab)
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 20),
-                            child: Center(
-                              child: CircularProgressIndicator(),
+                  
+                          if (controller.isLoadingMore.value && isActiveOrdersTab)
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 20),
+                              child: Center(
+                                child: CircularProgressIndicator(),
+                              ),
                             ),
-                          ),
-
-                        SizedBox(height: 20),
-                      ],
+                  
+                          SizedBox(height: 20),
+                        ],
+                      ),
                     ),
                   ),
                 );

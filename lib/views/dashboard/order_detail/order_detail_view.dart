@@ -3,6 +3,7 @@ import 'package:aqua_flow/utils/constants.dart';
 import 'package:aqua_flow/utils/helper_methods.dart';
 import 'package:aqua_flow/views/dashboard/order_detail/widgets/order_detail_widget.dart';
 import 'package:aqua_flow/widgets/custom_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -231,17 +232,27 @@ class OrderDetailView extends StatelessWidget {
                             ),
                             child: Row(
                               children: [
-                                Container(
+                                 Container(
                                   width: size.width * 0.12,
                                   height: size.width * 0.12,
-                                  decoration: BoxDecoration(
-                                    color: Colors.blue[50],
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Icon(
-                                    Icons.water_drop,
-                                    color: ColorConstants.themeColor,
-                                    size: size.width * 0.06,
+                                  color: Colors.blue[50],
+                                  child: CachedNetworkImage(
+                                    imageUrl: item.product?.image != null
+                                        ? "${ApiConstants.imageBaseUrl}${item.product?.image}"
+                                        : '',
+                                    fit: BoxFit.cover,
+                                    placeholder: (_, __) => const Center(
+                                      child: SizedBox(
+                                        width: 18,
+                                        height: 18,
+                                        child: CircularProgressIndicator(
+                                            strokeWidth: 2),
+                                      ),
+                                    ),
+                                    errorWidget: (_, __, ___) => const Icon(
+                                      Icons.error_outline,
+                                      color: Colors.redAccent,
+                                    ),
                                   ),
                                 ),
                                 SizedBox(width: size.width * 0.03),

@@ -27,69 +27,74 @@ class _ThirdStepWidgetState extends State<ThirdStepWidget> {
   // ];
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(height: 20),
-        const CustomText(
-          text: "Confirm Order",
-          fontSize: 17,
-          weight: FontWeight.w500,
-        ),
-        SizedBox(height: 20),
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            color: const Color(0xffEFF6FF),
+    return Obx(() {
+      if(controller.isLoading.value){
+        return Center(child: Container(margin: EdgeInsets.only(top: 150), child: CircularProgressIndicator()));
+      }
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(height: 20),
+          const CustomText(
+            text: "Confirm Order",
+            fontSize: 17,
+            weight: FontWeight.w500,
           ),
-          padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-          child: Obx(() {
-            return Column(
-              children: [
-                // Title
-                _buildPriceRow("Order Summary", ""),
+          SizedBox(height: 20),
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              color: const Color(0xffEFF6FF),
+            ),
+            padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+            child: Obx(() {
+              return Column(
+                children: [
+                  // Title
+                  _buildPriceRow("Order Summary", ""),
 
-                const SizedBox(height: 20),
+                  const SizedBox(height: 20),
 
-                // Total Items
-                _buildPriceRow(
-                  "Total Items",
-                  controller.totalItems.toString(),
-                  isOrderedList: true,
-                ),
-
-                // Subtotal
-                _buildPriceRow(
-                  "Subtotal",
-                  "PKR ${controller.totalAmount.value}",
-                  isOrderedList: true,
-                ),
-
-                // Deposit Available (only if bottles)
-                if (controller.withBottles.value &&
-                    controller.totalDeposit.value > 0)
+                  // Total Items
                   _buildPriceRow(
-                    "Total Deposit Taking",
-                    "PKR ${controller.totalDeposit.value}",
+                    "Total Items",
+                    controller.totalItems.toString(),
                     isOrderedList: true,
                   ),
 
-                const SizedBox(height: 20),
-                const Divider(height: 1, thickness: 1),
-                const SizedBox(height: 20),
+                  // Subtotal
+                  _buildPriceRow(
+                    "Subtotal",
+                    "PKR ${controller.totalAmount.value}",
+                    isOrderedList: true,
+                  ),
 
-                // Grand Total
-                _buildPriceRow(
-                  "Total Amount",
-                  "PKR ${controller.grandTotal.value}",
-                  isTotal: true,
-                ),
-              ],
-            );
-          }),
-        ),
-      ],
-    );
+                  // Deposit Available (only if bottles)
+                  if (controller.withBottles.value &&
+                      controller.totalDeposit.value > 0)
+                    _buildPriceRow(
+                      "Total Deposit Taking",
+                      "PKR ${controller.totalDeposit.value}",
+                      isOrderedList: true,
+                    ),
+
+                  const SizedBox(height: 20),
+                  const Divider(height: 1, thickness: 1),
+                  const SizedBox(height: 20),
+
+                  // Grand Total
+                  _buildPriceRow(
+                    "Total Amount",
+                    "PKR ${controller.grandTotal.value}",
+                    isTotal: true,
+                  ),
+                ],
+              );
+            }),
+          ),
+        ],
+      );
+    });
   }
 
   // Widget _buildPaymentMethods({

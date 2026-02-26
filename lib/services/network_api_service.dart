@@ -105,6 +105,7 @@ class NetworkApiService {
       case 403:
       case 404:
       case 422:
+      case 429:
       case 500:
         return jsonDecode(response.body);
 

@@ -52,6 +52,11 @@ class Order {
         required this.withBottles,
         required this.paidAmount,
         required this.paymentId,
+        required this.isException,
+        required this.exceptionType,
+        required this.originalQuantity,
+        required this.overrideQuantity,
+        required this.exceptionNotes,
         required this.paymentStatus,
         required this.driver,
         required this.zone,
@@ -86,6 +91,11 @@ class Order {
     final bool? withBottles;
     final int? paidAmount;
     final dynamic paymentId;
+    final bool? isException;
+    final dynamic exceptionType;
+    final dynamic originalQuantity;
+    final dynamic overrideQuantity;
+    final dynamic exceptionNotes;
     final String? paymentStatus;
     final dynamic driver;
     final Zone? zone;
@@ -121,6 +131,11 @@ class Order {
             withBottles: json["withBottles"],
             paidAmount: json["paidAmount"],
             paymentId: json["paymentId"],
+            isException: json["isException"],
+            exceptionType: json["exceptionType"],
+            originalQuantity: json["originalQuantity"],
+            overrideQuantity: json["overrideQuantity"],
+            exceptionNotes: json["exceptionNotes"],
             paymentStatus: json["paymentStatus"],
             driver: json["driver"],
             zone: json["zone"] == null ? null : Zone.fromJson(json["zone"]),
@@ -157,6 +172,11 @@ class Order {
         "withBottles": withBottles,
         "paidAmount": paidAmount,
         "paymentId": paymentId,
+        "isException": isException,
+        "exceptionType": exceptionType,
+        "originalQuantity": originalQuantity,
+        "overrideQuantity": overrideQuantity,
+        "exceptionNotes": exceptionNotes,
         "paymentStatus": paymentStatus,
         "driver": driver,
         "zone": zone?.toJson(),
@@ -223,6 +243,7 @@ class Product {
         required this.price,
         required this.isReusable,
         required this.depositAmount,
+        required this.image,
     });
 
     final String? id;
@@ -231,6 +252,7 @@ class Product {
     final int? price;
     final bool? isReusable;
     final int? depositAmount;
+    final String? image;
 
     factory Product.fromJson(Map<String, dynamic> json){ 
         return Product(
@@ -240,6 +262,7 @@ class Product {
             price: json["price"],
             isReusable: json["isReusable"],
             depositAmount: json["depositAmount"],
+            image: json["image"],
         );
     }
 
@@ -250,6 +273,7 @@ class Product {
         "price": price,
         "isReusable": isReusable,
         "depositAmount": depositAmount,
+        "image": image,
     };
 
 }
@@ -301,5 +325,4 @@ class Pagination {
         "total": total,
         "totalPages": totalPages,
     };
-
 }

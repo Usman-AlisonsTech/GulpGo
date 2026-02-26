@@ -45,7 +45,7 @@ class FirstStepWidget extends StatelessWidget {
       }).toList();
 
 
-      if (products.isEmpty) {
+      if (allProducts.isEmpty) {
         return Center(
           child: Container(
             margin: const EdgeInsets.only(top: 180),
@@ -71,8 +71,15 @@ class FirstStepWidget extends StatelessWidget {
 
           const SizedBox(height: 20),
 
+          if (products.isEmpty)
+           const Center(
+              child: Padding(
+                padding: EdgeInsets.only(top: 40),
+                child: CustomText(text: 'No products found'),
+              ),
+            )
           /// 🔥 PRODUCTS
-          ListView.builder(
+        else  ListView.builder(
             itemCount: products.length,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
